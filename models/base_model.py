@@ -5,7 +5,7 @@ from uuid import uuid4
 from datetime import datetime
 
 
-class BaseModel():
+class BaseModel:
     """Class for base model"""
 
     def __init__(self):
@@ -24,7 +24,7 @@ class BaseModel():
 
     def to_dict(self):
         """Creation of new_dict"""
-        new_dict = self.__dict__.copy()
+        new_dict = self.__dict__
         new_dict['__class__'] = self.__class__.__name__
         new_dict['create_at'] = self.created_at.isoformat()
         new_dict['update_at'] = self.updated_at.isoformat()
