@@ -14,14 +14,14 @@ class BaseModel():
         self.update_at = datetime.now()
 
     def __str__(self):
-        print(f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}")
+        return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
     def save(self):
         self.update_at = datetime.now()
 
     def to_dict(self):
         new_dict = self.__dict__.copy()
-        to_add = {'__class__': self.__class__.__name__}
-        new_dict.update(to_add)
-        to_add = {'created_at': self.created_at.isoformat()}
-        new_dict.update(to_add)
+        new_dict['__class__'] = self.__class__
+        new_dict['created_at'] = self.created_at.isoformat()
+        new_dict['update_at'] = self.update_at.isoformat()
+        return new_dict
