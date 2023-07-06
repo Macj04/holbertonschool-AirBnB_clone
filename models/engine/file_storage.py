@@ -28,6 +28,7 @@ class FileStorage:
         for key, value in FileStorage.__objects.items():
             data[key] = value.to_dict()
         
+        
         with open(self.__file_path, mode='a') as new_file:
             json.dump(data, new_file)
 
