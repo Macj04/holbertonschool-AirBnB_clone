@@ -3,6 +3,7 @@
 
 from uuid import uuid4
 from datetime import datetime
+from models import storage
 
 
 class BaseModel:
@@ -18,6 +19,7 @@ class BaseModel:
                 if key != "__class__":
                     setattr(self, key, value)
         else:
+            storage.new()
             self.id = str(uuid4())
             self.created_at = datetime.now()
 
@@ -27,6 +29,7 @@ class BaseModel:
 
     def save(self):
         """Save data time"""
+        storage.save()
         self.updated_at = datetime.now()
 
     def to_dict(self):
