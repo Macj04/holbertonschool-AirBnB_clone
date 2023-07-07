@@ -4,25 +4,20 @@
 import cmd
 
 class HBNBCommand(cmd.Cmd):
-    """_summary_
-
-    Args:
-        cmd (_type_): _description_
-    """
-    prompt = "(hbnb) "
+    prompt = '(hbnb) '
 
     def do_quit(self, arg):
-        """To exit de program with quit input"""
-        quit()
+        """Quit command to exit the program"""
+        return True
 
-    def do_E0F(self, arg):
+    def do_EOF(self, arg):
         """To exit the program with Ctrl+C or EOF"""
-        print()
-        quit()
+        return True
 
-    def empty_line(self, arg):
+    def emptyline(self):
         """An empty line if no input"""
         pass
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
