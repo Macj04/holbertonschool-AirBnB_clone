@@ -13,12 +13,12 @@ class HBNBCommand(cmd.Cmd):
 
     def do_quit(self, arg):
         """To exit de program with quit input"""
-        return True
+        quit()
 
     def do_E0F(self, arg):
         """To exit the program with Ctrl+C or EOF"""
         print()
-        return True
+        quit()
 
     def empty_line(self, arg):
         """An empty line if no input"""
