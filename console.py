@@ -21,8 +21,8 @@ class HBNBCommand(cmd.Cmd):
 
     def empty_line(self, arg):
         """An empty line if no input"""
-        cmd.emptyline()
+        pass
 
 if __name__ == '__main__':
-    """Repeatedly issue a prompt, accept input, parse an initial prefix off the received input, and dispatch to action methods, passing them the remainder of the line as argument."""
+    """Repeatedly issue a prompt, accept input."""
     HBNBCommand().cmdloop()
