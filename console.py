@@ -9,7 +9,7 @@ class HBNBCommand(cmd.Cmd):
     Args:
         cmd (_type_): _description_
     """
-    prompt = '(hbnb) '
+    prompt = "(hbnb) "
 
     def do_quit(self, arg):
         """To exit de program with quit input"""
@@ -17,6 +17,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_E0F(self, arg):
         """To exit the program with Ctrl+C or EOF"""
+        print()
         return True
 
     def empty_line(self, arg):
