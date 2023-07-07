@@ -3,7 +3,7 @@
 
 from uuid import uuid4
 from datetime import datetime
-import models
+from models import storage
 
 
 class BaseModel:
@@ -11,17 +11,20 @@ class BaseModel:
 
     def __init__(self, *args, **kwargs):
         """Init files function"""
-        self.id = str(uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
-        if kwargs:
+        if len(kwargs) > 0:
+            iso_format = "%Y-%m-%dT%H:%M:%S.%f"
             for key, value in kwargs.items():
-                if key != "__class__":
+                if key == "created_at":
+                    self.created_at = datetime.strptime(value, iso_format)
+                elif key == "updated_at":
+                    self.updated_at = datetime.strptime(value, iso_format)
+                elif key != "__class__":
                     setattr(self, key, value)
         else:
-            models.storage.new(self)
             self.id = str(uuid4())
             self.created_at = datetime.now()
+            self.updated_at = datetime.now()
+            storage.new(self)
 
     def __str__(self):
         """Return string representation"""
@@ -29,13 +32,13 @@ class BaseModel:
 
     def save(self):
         """Save data time"""
-        models.storage.save()
         self.updated_at = datetime.now()
+        storage.save()
 
     def to_dict(self):
         """Creation of new_dict"""
         new_dict = self.__dict__.copy()
-        new_dict['__class__'] = self.__class__.__name__
+        new_dict["__class__"] = self.__class__.__name__
         new_dict['created_at'] = self.created_at.isoformat()
         new_dict['updated_at'] = self.updated_at.isoformat()
         return new_dict
