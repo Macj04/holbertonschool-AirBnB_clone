@@ -25,5 +25,4 @@ class HBNBCommand(cmd.Cmd):
         pass
 
 if __name__ == '__main__':
-    """Repeatedly issue a prompt, accept input."""
     HBNBCommand().cmdloop()
