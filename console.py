@@ -12,16 +12,20 @@ class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
 
     def do_quit(self, arg):
-        """Quit command to exit the program."""
+        """Quit command to exit the program
+        """
         quit()
 
     def do_EOF(self, arg):
-        """Exit the program with Ctrl+D or EOF."""
+        """
+        Exit the program with Ctrl+D or EOF.
+        """
         print()
         quit()
 
     def emptyline(self):
-        """An empty line if no input.
+        """
+        An empty line if no input.
         """
         pass
 
