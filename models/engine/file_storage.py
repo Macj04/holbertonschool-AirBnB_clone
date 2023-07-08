@@ -40,6 +40,7 @@ class FileStorage:
             json.dump(data, new_file)
 
     def reload(self):
+        from models.base_model import BaseModel
         """Deserialization of objects to JSON File"""
         try:
             with open(FileStorage.__file_path, mode="r") as my_file:

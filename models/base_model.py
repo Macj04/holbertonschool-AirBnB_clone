@@ -3,13 +3,13 @@
 
 from uuid import uuid4
 from datetime import datetime
-from models import storage
 
 
 class BaseModel:
     """Class for base model"""
 
     def __init__(self, *args, **kwargs):
+        from models import storage
         """Init files function"""
         if len(kwargs) > 0:
             iso_format = "%Y-%m-%dT%H:%M:%S.%f"
@@ -31,6 +31,7 @@ class BaseModel:
         return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
     def save(self):
+        from models import storage
         """Save data time"""
         self.updated_at = datetime.now()
         storage.save()
