@@ -1,12 +1,26 @@
 #!/usr/bin/python3
 """AIRBNB The console. Base class."""
 import json
+from models.user import User
+from models.place import Place
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
+from models.state import State
 
 
 class FileStorage:
     """Stoarge of files class. Serialization and desearlization."""
     __file_path = "file.json"
     __objects = {}
+    __clases = {
+        "User": User,
+        "Place": Place,
+        "State": State,
+        "City": City,
+        "Amenity": Amenity,
+        "Review": Review
+    }
 
     def all(self):
         """return all dictionary"""
@@ -26,7 +40,6 @@ class FileStorage:
             json.dump(data, new_file)
 
     def reload(self):
-        from models.base_model import BaseModel
         """Deserialization of objects to JSON File"""
         try:
             with open(FileStorage.__file_path, mode="r") as my_file:

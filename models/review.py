@@ -2,8 +2,7 @@
 """AIRBNB The console. Base class."""
 from models.base_model import BaseModel
 
-
-class City(BaseModel):
+class Review(BaseModel):
     """
     Args:
         BaseModel (_type_): _description_

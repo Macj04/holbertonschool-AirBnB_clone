@@ -1,15 +1,27 @@
 #!/usr/bin/python3
 """Console module for the AirBnB project"""
 import cmd
-import json
-import sys
 from models.base_model import BaseModel
-from models import storage
 from models.user import User
+from models.place import Place
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
+from models.state import State
+from models import storage
 
 
 class HBNBCommand(cmd.Cmd):
     """Command interpreter class"""
+    __clases = {
+        "BaseModel": BaseModel,
+        "User": User,
+        "Place": Place,
+        "State": State,
+        "City": City,
+        "Amenity": Amenity,
+        "Review": Review
+    }
 
     prompt = "(hbnb) "
 
@@ -28,8 +40,8 @@ class HBNBCommand(cmd.Cmd):
             instance = model_class()
             instance.save()
             print(instance.id)
-        except NameError:
-            print("** class doesn't exist **")
+        except Exception:
+            print("** class is missing **")
 
     def do_show(self, arg):
         """Print string representation"""
@@ -39,11 +51,11 @@ class HBNBCommand(cmd.Cmd):
 
         args = arg.split()
         class_name = args[0]
-        try:
-            my_class = eval(class_name)
-        except NameError:
+        if class_name not in HBNBCommand.__clases:
             print("** class doesn't exist **")
             return
+        else:
+            my_class = eval(class_name)
         if len(args) < 2:
             print("** instance id missing **")
             return
@@ -61,12 +73,12 @@ class HBNBCommand(cmd.Cmd):
         instances = storage.all()
 
         if arg:
-            try:
-                model_class = eval(arg)
-                instances = {k: v for k, v in instances.items() if isinstance(v, model_class)}
-            except NameError:
+            if arg not in HBNBCommand.__clases:
                 print("** class doesn't exist **")
                 return
+            else:
+                model_class = eval(arg)
+                instances = {k: v for k, v in instances.items() if isinstance(v, model_class)}
 
         print([str(instance) for instance in instances.values()])
 
@@ -79,11 +91,11 @@ class HBNBCommand(cmd.Cmd):
         args = arg.split()
         class_name = args[0]
 
-        try:
-            model_class = eval(class_name)
-        except NameError:
+        if class_name not in HBNBCommand.__clases:
             print("** class doesn't exist **")
             return
+        else:
+            model_class = eval(class_name)
         if len(args) < 2:
             print("** instance id missing **")
             return
@@ -106,11 +118,11 @@ class HBNBCommand(cmd.Cmd):
         args = arg.split()
         class_name = args[0]
 
-        try:
-            model_class = eval(class_name)
-        except NameError:
+        if arg not in HBNBCommand.__clases:
             print("** class doesn't exist **")
             return
+        else:
+            model_class = eval(class_name)
         if len(args) < 2:
             print("** instance id missing **")
             return
