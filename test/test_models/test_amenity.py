@@ -1,11 +1,8 @@
 #!/usr/bin/python3
-"""AIRBNB The console. Base class."""
+"""Testing Amenity Module"""
+
+import unittest
 from models.base_model import BaseModel
 
-
-class Amenity(BaseModel):
-    """
-    Args:
-        BaseModel (_type_): _description_
-    """
-    name = ""
+class Test_Amenity(unittest.TestCase):
+    pass

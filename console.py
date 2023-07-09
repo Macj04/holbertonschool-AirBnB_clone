@@ -78,7 +78,10 @@ class HBNBCommand(cmd.Cmd):
                 return
             else:
                 model_class = eval(arg)
-                instances = {k: v for k, v in instances.items() if isinstance(v, model_class)}
+                new_instances = {}
+            for k, v in instances.items():
+                if isinstance(v, model_class):
+                    new_instances[k] = v
 
         print([str(instance) for instance in instances.values()])
 
@@ -145,7 +148,8 @@ class HBNBCommand(cmd.Cmd):
             return
         instance = instances[instance_key]
         if hasattr(instance, attribute_name):
-            attribute_value = type(getattr(instance, attribute_name))(attribute_value)
+            attr = getattr(instance, attribute_name)
+            attribute_value = type(attr)(attribute_value)
             setattr(instance, attribute_name, attribute_value)
             instance.save()
         else:
