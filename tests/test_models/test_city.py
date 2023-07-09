@@ -2,7 +2,7 @@
 """Testing City Module"""
 
 import unittest
-from models.base_model import BaseModel
+from models.city import City
 
 
 class testCity(unittest.TestCase):

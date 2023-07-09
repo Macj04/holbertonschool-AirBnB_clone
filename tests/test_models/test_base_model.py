@@ -5,7 +5,7 @@ import unittest
 from models.base_model import BaseModel
 
 
-class Test_Base(unittest.TestCase):
+class testBase(unittest.TestCase):
     pass
 
 

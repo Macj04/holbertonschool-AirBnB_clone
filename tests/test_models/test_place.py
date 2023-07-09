@@ -6,7 +6,7 @@ import unittest
 from models.place import Place
 
 
-class Test_classPlace(unittest.TestCase):
+class testPlace(unittest.TestCase):
     pass
 
 

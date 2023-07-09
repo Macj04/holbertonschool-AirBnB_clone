@@ -2,10 +2,10 @@
 """Testing Review Module"""
 
 import unittest
-from models.base_model import BaseModel
+from models.review import Review
 
 
-class Test_Review(unittest.TestCase):
+class testReview(unittest.TestCase):
     pass
 
 

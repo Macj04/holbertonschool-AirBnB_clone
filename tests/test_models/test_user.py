@@ -2,10 +2,10 @@
 """Testing User Module"""
 
 import unittest
-from models.base_model import BaseModel
+from models.user import User
 
 
-class Test_User(unittest.TestCase):
+class testUser(unittest.TestCase):
     pass
 
 

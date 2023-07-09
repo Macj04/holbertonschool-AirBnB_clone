@@ -4,7 +4,7 @@ import unittest
 from models.engine.file_storage import FileStorage
 
 
-class Test_Storage(unittest.TestCase):
+class testStorage(unittest.TestCase):
 
     def test_all(self):
         pass
