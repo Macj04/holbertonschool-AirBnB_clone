@@ -36,9 +36,10 @@ class HBNBCommand(cmd.Cmd):
             return
 
         try:
-            model_class = eval(arg)
-            instance = model_class()
-            instance.save()
+            model_class = eval(arg) #Evaluate if the arg is validate and assign them to model_class
+            instance = model_class() #Create an instance (Create an object based on a class)
+            #Then save the object and print ID
+            instance.save() 
             print(instance.id)
         except Exception:
             print("** class is missing **")
@@ -49,8 +50,8 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
 
-        args = arg.split()
-        class_name = args[0]
+        args = arg.split
+        class_name = args[0] #Class name will be the first arg passed
         if class_name not in HBNBCommand.__clases:
             print("** class doesn't exist **")
             return
@@ -59,12 +60,11 @@ class HBNBCommand(cmd.Cmd):
         if len(args) < 2:
             print("** instance id missing **")
             return
-        instance_id = args[1]
-        instance_key = class_name + '.' + instance_id
-        storage.reload()
-        instances = storage.all()
+        instance_id = args[1] #ID will be the second arg passed
+        instance_key = class_name + '.' + instance_id #Create a key
+        instances = storage.all() #Save all objects in instances
         if instance_key in instances:
-            print(instances[instance_key])
+            print(instances[instance_key]) #If the generated key exist, print it
         else:
             print("** no instance found **")
 
@@ -77,9 +77,9 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
                 return
             else:
-                model_class = eval(arg)
+                model_class = eval(arg) #Evaluate that arg is validate
                 new_instances = {}
-            for k, v in instances.items():
+            for k, v in instances.items(): 
                 if isinstance(v, model_class):
                     new_instances[k] = v
 
@@ -98,16 +98,16 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return
         else:
-            model_class = eval(class_name)
+            model_class = eval(class_name) 
         if len(args) < 2:
             print("** instance id missing **")
             return
         instance_id = args[1]
         instance_key = class_name + '.' + instance_id
-        storage.reload()
         instances = storage.all()
         if instance_key in instances:
-            instances.pop(instance_key)
+            #Delete it and save
+            instances.pop(instance_key) 
             storage.save()
         else:
             print("** no instance found **")
@@ -147,11 +147,12 @@ class HBNBCommand(cmd.Cmd):
             print("** no instance found **")
             return
         instance = instances[instance_key]
-        if hasattr(instance, attribute_name):
-            attr = getattr(instance, attribute_name)
-            attribute_value = type(attr)(attribute_value)
-            setattr(instance, attribute_name, attribute_value)
-            instance.save()
+        if hasattr(instance, attribute_name): 
+            #If instance have attribute_name do:
+            attr = getattr(instance, attribute_name) #Obtain the attr
+            attribute_value = type(attr)(attribute_value) #Obtain attr value with the same type
+            setattr(instance, attribute_name, attribute_value) #Set the atrr to the instance
+            instance.save() #Save the changes
         else:
             print("** attribute doesn't exist **")
 
