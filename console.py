@@ -146,7 +146,7 @@ class HBNBCommand(cmd.Cmd):
         if instance_key not in instances:
             print("** no instance found **")
             return
-        instance = instances[instance_key]
+        instance = instances[instance_key] #Access to value that is equalis to instances_key)?
         if hasattr(instance, attribute_name): 
             #If instance have attribute_name do:
             attr = getattr(instance, attribute_name) #Obtain the attr
