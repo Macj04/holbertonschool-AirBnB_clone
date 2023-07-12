@@ -29,12 +29,14 @@ class FileStorage:
     def new(self, obj):
         """Creating a new obj"""
         key = obj.__class__.__name__ + "." + obj.id
+        #Key equals obj
         FileStorage.__objects[key] = obj
 
     def save(self):
         """Serialization of objects to JSON File"""
         data = {}
         for key, value in FileStorage.__objects.items():
+            #Value obtained by to_dict
             data[key] = value.to_dict()
         with open(FileStorage.__file_path, mode='w', encoding="utf-8") as f:
             json.dump(data, f)
@@ -46,6 +48,7 @@ class FileStorage:
             with open(FileStorage.__file_path, mode="r") as my_file:
                 objects = json.load(my_file)
                 for key, value in objects.items():
+                    #BaseModel() obtain value of the dict
                     self.__objects[key] = BaseModel(**value)
         except FileNotFoundError:
             pass
