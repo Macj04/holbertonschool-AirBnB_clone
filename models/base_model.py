@@ -12,19 +12,22 @@ class BaseModel:
         from models import storage
         """Init files function"""
         if len(kwargs) > 0:
-            iso_format = "%Y-%m-%dT%H:%M:%S.%f"
-            for key, value in kwargs.items():
+            iso_format = "%Y-%m-%dT%H:%M:%S.%f" #Format specified by intranet
+            for key, value in kwargs.items(): 
+                #Iterate over dict and assign time value & attr
                 if key == "created_at":
-                    self.created_at = datetime.strptime(value, iso_format)
+                    self.created_at = datetime.strptime(value, iso_format) 
                 elif key == "updated_at":
                     self.updated_at = datetime.strptime(value, iso_format)
                 elif key != "__class__":
+                    #if no class, create one & assign value to dict.
                     setattr(self, key, value)
         else:
+            #if no dict, create one
             self.id = str(uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
-            storage.new(self)
+            storage.new(self) 
 
     def __str__(self):
         """Return string representation"""
@@ -32,12 +35,12 @@ class BaseModel:
 
     def save(self):
         from models import storage
-        """Save data time"""
-        self.updated_at = datetime.now()
-        storage.save()
+        """Save data time when updated"""
+        self.updated_at = datetime.now() #Time when updated
+        storage.save() 
 
     def to_dict(self):
-        """Creation of new_dict"""
+        """Create a new_dict"""
         new_dict = self.__dict__.copy()
         new_dict["__class__"] = self.__class__.__name__
         new_dict['created_at'] = self.created_at.isoformat()
